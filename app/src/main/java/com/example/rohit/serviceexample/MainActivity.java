@@ -20,8 +20,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //getting button id reference
-        buttonStart = (Button) findViewById(R.id.buttonStart);
-        buttonStop = (Button) findViewById(R.id.buttonStop);
+        buttonStart = findViewById(R.id.buttonStart);
+        buttonStop = findViewById(R.id.buttonStop);
 
         //attaching onclicklistener to buttons
         buttonStart.setOnClickListener(this);
@@ -37,12 +37,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             // checking the service is running or not if not ru
             if ( !bool){
-                //starting service
+                //starting service using intent
                 startService(new Intent(this, MyService.class));
             }
 
         } else if (view == buttonStop) {
-            //stopping service
+            //stopping service using intent
             stopService(new Intent(this, MyService.class));
         }
     }
@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // method to check the service is already running or not
     private boolean isMyServiceRunning(Class<?> serviceClass) {
         ActivityManager manager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        assert manager != null;
         for (ActivityManager.RunningServiceInfo service : manager.getRunningServices(Integer.MAX_VALUE)) {
             if (serviceClass.getName().equals(service.service.getClassName())) {
 
