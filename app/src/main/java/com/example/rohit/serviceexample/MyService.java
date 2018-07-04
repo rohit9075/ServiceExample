@@ -7,6 +7,10 @@ import android.os.IBinder;
 import android.provider.Settings;
 import android.support.annotation.Nullable;
 
+/**
+ * service class to play default phone ringtone.
+ */
+
 public class MyService extends Service {
     //creating a mediaplayer object
     private MediaPlayer player;
