@@ -13,7 +13,8 @@ import android.support.annotation.Nullable;
 
 public class MyService extends Service {
     //creating a mediaplayer object
-    private MediaPlayer player;
+      Ringtone ringtone;
+    
 
     @Nullable
     @Override
@@ -21,20 +22,17 @@ public class MyService extends Service {
         return null;
     }
 
+    Ringtone ringtone;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        //getting systems default ringtone
-        player = MediaPlayer.create(this,
-                Settings.System.DEFAULT_RINGTONE_URI);
-        //setting loop play to true
-        //this will make the ringtone continuously playing
-        player.setLooping(true);
+       
+        // getting the ringtone using RingtoneManager
+        Uri alert = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+       
+        ringtone = RingtoneManager.getRingtone(getApplicationContext(),  alert);
+        ringtone.setStreamType(AudioManager.STREAM_RING);
+        ringtone.play();
 
-        //staring the player
-        player.start();
-
-        //we have some options for service
-        //start sticky means service will be explicity started and stopped
         return START_STICKY;
     }
 
@@ -42,7 +40,6 @@ public class MyService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        //stopping the player when service is destroyed
-        player.stop();
+        ringtone.stop();
     }
 }
