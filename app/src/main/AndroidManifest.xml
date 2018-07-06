@@ -17,7 +17,7 @@
             </intent-filter>
         </activity>
 
-        // defining the service class
+        <!--Registering the service -->
         <service android:name=".MyService" />
     </application>
 

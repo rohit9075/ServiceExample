@@ -8,6 +8,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * MainActivity this is launcher activity
+ */
+
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     //button objects
@@ -38,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             // checking the service is running or not if not ru
             if ( !bool){
                 //starting service using intent
-                startService(new Intent(this, MyService.class));
+                Intent intent = new Intent(this, MyService.class);
+                startService(intent);
             }
 
         } else if (view == buttonStop) {
