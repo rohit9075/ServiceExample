@@ -2,9 +2,11 @@ package com.example.rohit.serviceexample;
 
 import android.app.Service;
 import android.content.Intent;
-import android.media.MediaPlayer;
+import android.media.AudioManager;
+import android.media.Ringtone;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.IBinder;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 
 /**
@@ -22,7 +24,6 @@ public class MyService extends Service {
         return null;
     }
 
-    Ringtone ringtone;
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
        
@@ -40,6 +41,8 @@ public class MyService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+
+        // stopping the service
         ringtone.stop();
     }
 }
